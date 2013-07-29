@@ -18,18 +18,18 @@ class Article(models.Model):
         (INFORMATICS, 'INFORMATICS'),
         (MEDICINE, 'MEDICINE'),
     )
-	subject = models.CharField(max_length=15,choices=PARAMETER_TYPE_CHOICES, default=INFORMATICS, verbose_name='Main article subject', help_text='Main article subject')
+	subject = models.CharField(max_length=25,choices=PARAMETER_TYPE_CHOICES, default=INFORMATICS, verbose_name='Main article subject', help_text='Main article subject')
 	
 	user = models.ManyToManyField(User)
 	
-	def __unicode__(self):
+	def __str__(self):
 		return self.title
 
 class Profile(models.Model):
 	user = models.ForeignKey(User, unique=True)
 	country = models.CharField(max_length=15,verbose_name='Country')
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.user.username
 
 # class Parameter(models.Model):
