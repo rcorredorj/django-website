@@ -1,0 +1,24 @@
+{% extends 'private_base.html' %}
+
+{% block title %}RaC Web{% endblock %}
+
+{% block header %} 
+  {% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Welcome to RaCWeb</h1>
+  <p>
+    Welcome {{usr.username|upper}}, 
+    the last time you have logged in was the {{usr.last_login}}.
+  </p>
+  <p>
+    Member since {{usr.date_joined}}
+  </p>
+
+  <p>
+    Currently we have {% with total=articles.count %} {{total}} article{{total|pluralize}} {% endwith %}
+  </p>
+</div> <!-- container -->
+{% endblock %}

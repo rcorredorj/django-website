@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block titulo %}New Patient{% endblock %}
+
+{% block encabezado %} 
+  {% include 'header.html' %}
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container">
+	<form id='patient_form' method='post' action=''>{% csrf_token %}
+		{{patient_form}}
+		<p><input type='submit' value='Send'/></p>
+	</form>
+</div> <!-- container -->
+
+{% endblock %}
+
+

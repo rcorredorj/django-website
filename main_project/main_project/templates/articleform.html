@@ -1,0 +1,11 @@
+{% extends 'private_base.html' %}
+{% block title %}New article{% endblock %}
+{% block header %} 
+	{% include 'header.html' %}
+{% endblock %}
+{% block content %}
+	<form id='articleform' method='post' action=''>{% csrf_token %}
+		{{article_form.as_p}}
+		<p><input type='submit' value='Register'/></p>
+	</form>
+{% endblock %}
