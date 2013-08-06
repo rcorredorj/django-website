@@ -5,6 +5,8 @@ django-website
 Simple website using Django 1.5.1, SQLite3, and Bootstrap 2.3.2.
 ==============
 
+NEW: 30/07 Using Highcharts 3.0.2. Be careful with the license for commercial websites.
+
 IN ENGLISH:
 
 It consists of a very simple database and three main views that help as a template to create almost any website:
@@ -23,7 +25,7 @@ To keep in mind: The basic stuff of this project were made in 4 hours. When you 
 
 IN SPANISH:
 
-Página web simple usando Django 1.5.1, SQLite3, y Bootstrap 2.3.2. 
+Pagina web simple usando Django 1.5.1, SQLite3, y Bootstrap 2.3.2. 
 
 Consiste de una simple base de datos y tres vistas principales que sirven de plantilla para crear casi cualquier sitio web:
   - Pagina de registro
@@ -32,7 +34,7 @@ Consiste de una simple base de datos y tres vistas principales que sirven de pla
 
 Este proyecto es libre pero, por favor, diganme si usan este proyecto como plantilla para sus trabajos 
 
-Para tener en cuenta: Las cosas básicas de este proyecto fue realizado en solo 4 horas. Cuando se entiende (no es tan fácil) la lógica y la facilidad de Django, el desarrollo web se vuelve extremadamente rápido.
+Para tener en cuenta: Las cosas bï¿½sicas de este proyecto fue realizado en solo 4 horas. Cuando se entiende (no es tan fï¿½cil) la lï¿½gica y la facilidad de Django, el desarrollo web se vuelve extremadamente rï¿½pido.
 
 Cheers!
 
