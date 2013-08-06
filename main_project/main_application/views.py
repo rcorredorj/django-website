@@ -26,7 +26,7 @@ def detail_article(request, id_article):
 @login_required(login_url='/home')
 def contact(request):
     if request.method=='POST':
-        contact_form = ContactForm(request.POST)
+        contact_form = ContactForm(data=request.POST)
         if contact_form.is_valid():
             titulo = 'Mensaje desde el recetario de Maestros del Web'
             contenido = contact_form.cleaned_data['message'] + "\n"
@@ -41,13 +41,19 @@ def contact(request):
 @login_required(login_url='/home')
 def new_article(request):
     if request.method=='POST':
-        article_form = ArticleForm(request.POST)
-        if article_form.is_valid:
+        article_form = ArticleForm(data=request.POST)
+        logger.error('RAC ArticleForm is_valid:'+str(article_form.is_valid()))
+        if article_form.is_valid():
             article_form.save()
             return HttpResponseRedirect('/')
     else:
         article_form = ArticleForm()
     return render_to_response('articleform.html',{'article_form':article_form}, context_instance=RequestContext(request))
+
+@login_required(login_url='/home')
+def get_articles(request):
+    articles = Article.objects.all()
+    return render_to_response('articles.html',{'articles':articles}, context_instance=RequestContext(request))
 
 def home(request):
     if not request.user.is_anonymous():

@@ -5,7 +5,8 @@
 {% endblock %}
 {% block content %}
 	<form id='articleform' method='post' action=''>{% csrf_token %}
-		{{article_form.as_p}}
-		<p><input type='submit' value='Register'/></p>
+		{{article_form}}
+		<br/>
+		<input type='submit' class='btn' value='Register'/>
 	</form>
 {% endblock %}

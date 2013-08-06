@@ -1,0 +1,22 @@
+{% extends 'private_base.html' %}
+
+{% block title %}Article{% endblock %}
+
+{% block header %} 
+  {% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Article</h1>
+  <p>
+    Author: {{article.first_author}}
+  </p>
+  <p>
+    Title: {{article.title}}
+  </p>
+  <p>
+    Subject: {{article.subject}}
+  </p>
+</div> <!-- container -->
+{% endblock %}

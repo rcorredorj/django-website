@@ -1,21 +1,112 @@
-{% extends 'base.html' %}
-{% block titulo %} Recetas registradas {% endblock %}
+{% extends 'private_base.html' %}
+{% block title %}Articles{% endblock %}
 
-{% block css %}
-  <style>
-	img { width:100px; }
-  </style>
+
+{% block style_css %}
 {% endblock %}
 
 
-{% block encabezado %}
-  <h1>Nuestras recetas</h1>
+{% block header %} 
+	{% include 'header.html' %}
 {% endblock %}
 
-{% block contenido %}
-<a href="/receta/nueva">Agregar una receta</a>
+
+
+{% block content %}
+
+{% comment %} <a href="/private/article">Agregar una receta</a> {% endcomment %}
+
+<div id="categoryPieChart" 
+    style="min-width: 250px; height: 250px; margin: 0 auto"></div>
+
+<script src="{{STATIC_URL}}highcharts/js/highcharts.js"></script>
+<script src="{{STATIC_URL}}highcharts/js/modules/exporting.js"></script>
+    
+<script>
+function numberWithCommas(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+}
+
+$(function () {
+    var chart;       
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'categoryPieChart'
+            },title: {
+                text: 'Quality'
+            },tooltip: {
+                formatter: function() {
+                    return '<b>'+ this.point.name +'</b>: '+ numberWithCommas(this.y.toFixed(2));
+                }
+            },exporting: {
+                enabled: false
+            },plotOptions: {
+                pie: {
+                    dataLabels: {
+                        enabled: true,
+                            formatter: function() {
+                                return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
+                            }
+                        }
+                    }
+                },series: [{
+                    type: 'pie',
+                    data: [
+                        {% for article in articles %}
+                        [
+                            '{{ article.first_author }}', 
+                            {% if article.quality > 0 %}
+                                {{ article.quality }}
+                            {% else %}
+                                0
+                            {% endif %}
+                        ],
+                        {% endfor %}
+                    ]
+                }]
+            });
+        });
+    });
+
+</script>
+
+
+
+<table class="table table-striped table-bordered">
+<thead> 
+<tr> 
+    <th>Author</th> 
+    <th>Title</th>
+    <th>Already Read?</th> 
+    <th>Quality</th> 
+    <th>Subject</th>
+</tr> 
+</thead> 
+
+<tbody> 
+
+{% for article in articles %}
+<tr> 
+    <td><a href="/private/article/{{article.id}}" >{{article.first_author}}</a></td> 
+    <td>{{article.title}}</td> 
+    <td>{% if article.alredy_read == true %} True {% else %} false {% endif %}</td> 
+    <td>{{article.quality}}</td> 
+    <td>{{article.subject}}</td> 
+</tr> 
+{% empty %}
+	<tr>
+		<td>No registered articles</td>
+	</tr>
+{% endfor %}
+</tbody> 
+</table>
+
+{% comment %}
 <ul>
-	{% for dato in datos %}
+	{% for article in articles %}
 	<li>
 		<a href='{% url principal.views.detalle_receta dato.id %}'>{{dato.titulo}}</a>
 		<img src='{{MEDIA_URL}}{{dato.imagen}}'>
@@ -24,4 +115,6 @@
 	<li>Aún no hay recetas registradas</li>
 	{% endfor %}
 </ul>
+{% endcomment %}
+
 {% endblock %}
