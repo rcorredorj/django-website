@@ -1,7 +1,7 @@
 #encoding:utf-8 
 from django.forms import ModelForm
 from django import forms
-from main_application.models import Article
+from main_application.models import Article, Field
 #from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -10,8 +10,12 @@ class ContactForm(forms.Form):
 	message = forms.CharField(widget=forms.Textarea)
 
 class ArticleForm(ModelForm):
-    class Meta:
-        model = Article
+	class Meta:
+		model = Article
+
+class FieldForm(ModelForm):
+	class Meta:
+		model = Field
 
 
 # class OtherForm(forms.Form):

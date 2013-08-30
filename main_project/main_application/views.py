@@ -1,6 +1,6 @@
 # Create your views here.
 from main_application.models import Article
-from main_application.forms import ContactForm, ArticleForm
+from main_application.forms import ContactForm, ArticleForm, FieldForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -49,6 +49,19 @@ def new_article(request):
     else:
         article_form = ArticleForm()
     return render_to_response('articleform.html',{'article_form':article_form}, context_instance=RequestContext(request))
+
+# Fields form
+@login_required(login_url='/home')
+def new_form(request):
+    if request.method=='POST':
+        field_form = FieldForm(data=request.POST)
+        logger.error('RAC ArticleForm is_valid:'+str(field_form.is_valid()))
+        if field_form.is_valid():
+            field_form.save()
+            return HttpResponseRedirect('/')
+    else:
+        field_form = FieldForm()
+    return render_to_response('fieldform.html',{'field_form':field_form}, context_instance=RequestContext(request))
 
 @login_required(login_url='/home')
 def get_articles(request):

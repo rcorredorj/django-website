@@ -53,3 +53,57 @@ class Profile(models.Model):
 	# min_value = models.CharField(max_length=15, verbose_name='Min value for numerical values', default='NULL')
 	# max_value = models.CharField(max_length=15, verbose_name='Max value for numerical values', default='NULL')
 	# choices = models.CharField(max_length=200, verbose_name='Choices to be selected', default='NULL')
+
+class Field(models.Model):
+	id = models.AutoField(primary_key=True)
+	label = models.CharField(max_length=50, verbose_name='Param label', unique=True)
+	description = models.CharField(max_length=200, verbose_name='Param description')
+
+	NUMBER = 'NUM'
+	BOOLEAN = 'BOOL'
+	TEXT = 'TEXT'
+	CHOICES = 'CHOICES'
+	FIELD_TYPE_CHOICES = (
+        (NUMBER, 'Numeric value'),
+        (BOOLEAN, 'Boolean value'),
+        (TEXT, 'String value'),
+        (CHOICES, 'Selection value'),
+    )
+	field_type = models.CharField(max_length=15,choices=FIELD_TYPE_CHOICES, default=TEXT,null=False)
+	
+	min_value = models.CharField(max_length=15, verbose_name='Min value for numerical values', default='NULL')
+	max_value = models.CharField(max_length=15, verbose_name='Max value for numerical values', default='NULL')
+	choices = models.CharField(max_length=200, verbose_name='Choices to be selected', default='NULL')
+	basic_info = models.BooleanField(verbose_name='Is basic info?', help_text='Is basic info?')
+	
+	EVENT = 'EVNT'
+	AUTHOR = 'AUTH'
+	PARENTFORM_TYPE_CHOICES = (
+        (EVENT, 'Event info'),
+        (AUTHOR, 'Author info'),
+	)
+	parentform_type = models.CharField(max_length=15, choices=PARENTFORM_TYPE_CHOICES, default=TEXT, null=False)
+
+	def __unicode__(self):
+		return self.label
+
+class Person(models.Model):
+	user = models.ForeignKey(User, unique=True)
+	country = models.CharField(max_length=15,verbose_name='Country')
+	fields = models.ManyToManyField(Field, through='PersonFieldValues')
+
+	def __str__(self):
+		return self.user.username
+
+class Author(models.Model):
+	user = models.ForeignKey(User, unique=True)
+	country = models.CharField(max_length=15,verbose_name='Country')
+	fields = models.ManyToManyField(Field, through='PersonFieldValues')
+
+	def __str__(self):
+		return self.user.username
+
+class PersonFieldValues(models.Model):
+	person = models.ForeignKey(Person)
+	field = models.ForeignKey(Field)
+	value = models.CharField(max_length=50, verbose_name='Field value', null=False)
