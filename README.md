@@ -25,16 +25,16 @@ To keep in mind: The basic stuff of this project were made in 4 hours. When you 
 
 IN SPANISH:
 
-Pagina web simple usando Django 1.5.1, SQLite3, y Bootstrap 2.3.2. 
+Página web simple usando Django 1.5.1, SQLite3, y Bootstrap 2.3.2. 
 
 Consiste de una simple base de datos y tres vistas principales que sirven de plantilla para crear casi cualquier sitio web:
-  - Pagina de registro
+  - Página de registro
   - Insertar datos en la base de datos
   - Obtener datos y visualizarlos
 
 Este proyecto es libre pero, por favor, diganme si usan este proyecto como plantilla para sus trabajos 
 
-Para tener en cuenta: Las cosas b�sicas de este proyecto fue realizado en solo 4 horas. Cuando se entiende (no es tan f�cil) la l�gica y la facilidad de Django, el desarrollo web se vuelve extremadamente r�pido.
+Para tener en cuenta: Las cosas básicas de este proyecto fue realizado en solo 4 horas. Cuando se entiende (no es tan fácil) la lógica y la facilidad de Django, el desarrollo web se vuelve extremadamente rápido.
 
 Cheers!
 
