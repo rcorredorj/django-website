@@ -95,14 +95,6 @@ class Person(models.Model):
 	def __str__(self):
 		return self.user.username
 
-class Author(models.Model):
-	user = models.ForeignKey(User, unique=True)
-	country = models.CharField(max_length=15,verbose_name='Country')
-	fields = models.ManyToManyField(Field, through='PersonFieldValues')
-
-	def __str__(self):
-		return self.user.username
-
 class PersonFieldValues(models.Model):
 	person = models.ForeignKey(Person)
 	field = models.ForeignKey(Field)
