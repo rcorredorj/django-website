@@ -1,0 +1,17 @@
+git clone https://github.com/rcorredorj/django-website.git
+git log --pretty=onelineqq
+git config --global --list # All the global git configs
+git push origin dynamicForm # Push to a specific branch
+
+django-admin.py startproject nameOfTheProj # create project
+python manage.py startapp nameOfTheApp # create app
+python manage.py version # python version
+python manage.py runserver 8080
+python manage.py syncdb
+python manage.py shell
+
+python manage.py sql nameOfTheApp
+python manage.py validate # validate models
+
+less /etc/httpd/conf.modules.d/10-wsgi.conf
+less /etc/httpd/conf.d/djangoApp.conf
