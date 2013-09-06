@@ -5,6 +5,7 @@ django-website
 Simple website using Django 1.5.2, Python 2.7.3, SQLite3, and Bootstrap 2.3.2.
 ==============
 
+NEW: 06/09 Using XTK (last version until today, no version number). I display two simple ASCII VTK files in the same renderer. 
 NEW: 30/07 Using Highcharts 3.0.2. Be careful with the license for commercial websites.
 
 IN ENGLISH:
