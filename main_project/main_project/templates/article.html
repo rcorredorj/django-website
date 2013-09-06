@@ -4,10 +4,119 @@
 
 {% block header %} 
   {% include 'header.html' %}
+
+<script type="text/javascript" src="http://get.goXTK.com/xtk.js"></script>
+
+<script type="text/javascript">
+  /*
+
+  var run = function() {
+    
+    var r = new X.renderer3D();
+    r.container = 'canvas3D';
+    r.init();
+    
+    var cube = new X.cube();
+    
+    r.add(cube);
+
+    r.render();
+     
+  };
+
+  window.onload = run;
+  */
+</script>
+
+<script type="text/javascript">
+
+var defaultOpacity = 0.8;
+
+$(function () {
+  preview_new(window.location.hash.slice(1));
+/*
+  $("#opacity" ).slider({
+    value: document.defaultOpacity * 100.0,
+    slide: function(event, ui) { 
+      document.model.setOpacity(ui.value/100.0);
+      document.renderer.render();
+    }
+  });
+ */
+});
+
+function check_webgl() {
+  var webgl = true;
+  try {
+    if (window.WebGLRenderingContext) {
+      var cvs = document.createElement('canvas3D');
+      var contextNames = ["webgl","experimental-webgl","moz-webgl","webkit-3d"];
+      var ctx;
+      for(var i = 0; i < contextNames.length; i++){
+        try{
+          ctx = cvs.getContext(contextNames[i]);
+          if(ctx){
+            break;
+          }
+        }catch(e){}
+      }
+      
+      if (!ctx) {
+        webgl = false;
+      }
+    }
+    else {
+      webgl = false;
+    }
+  }
+  catch (err) {
+    webgl = false;
+  }
+  return webgl;
+}
+
+
+function preview_new() {
+
+  ren3d = new X.renderer3D();
+  ren3d.container = "canvas3D";
+  ren3d.init();
+  
+  document.renderer = ren3d;
+  
+  var modelSphere = new X.mesh();
+  modelSphere.file = '{{MEDIA_URL}}sphere.vtk';
+  modelSphere.opacity = defaultOpacity;
+  modelSphere.color = [0.3, 0.6, 0.8];
+
+  var modelCylinder = new X.mesh();
+  modelCylinder.file = '{{MEDIA_URL}}cylinder.vtk';
+  modelCylinder.opacity = 0.9;
+  modelCylinder.color = [0.8, 0.2, 0.2];
+  
+  document.model = modelSphere;
+ 
+
+  ren3d.add(modelSphere);
+  ren3d.add(modelCylinder);
+
+
+  ren3d.render();
+}
+
+
+
+</script>
+
+
+
+
+
 {% endblock %}
 
 {% block content %}
 <div class="container">
+  <div class="span3">
   <h1>Article</h1>
   <p>
     Author: {{article.first_author}}
@@ -18,5 +127,18 @@
   <p>
     Subject: {{article.subject}}
   </p>
+</div>
+
+  <div class="span4">
+    <div class="thumbnail">
+      <div id="canvas3D" style="background-color: #DDDDDD;height: 400px;"></div>
+    </div>  
+  </div>
 </div> <!-- container -->
+
+<div class="container">
+  
+  </div>
+
+
 {% endblock %}
